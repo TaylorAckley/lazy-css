@@ -6,7 +6,27 @@ These classes were primarily intended for usage in wireframing and prototyping t
 
 ## Installation
 
-Install using Bower, `bower install lazy-css`, or grab the css or scss files from their relative directives.    The scss can be included as a `@import` in your main scss file.
+Install by using one of the popular package managers:
+
+- Bower : `bower install lazy-css`
+- NPM: `npm install lazy-css`
+- Yarn: `npm install lazy-css`
+
+You can of course clone directly from github.
+
+Once downloaded, you can include the compiled css as a standard link tag:
+
+`<link rel="stylesheet" href="lazy-helpers.min.css">`
+
+via CDN:
+
+`<link rel="stylesheet" href="https://unpkg.com/lazy-css@0.9.0/css/lazy-helpers.css">`
+
+Or you can import it into a existing scss/sass file:
+
+`@import 'lazy-helpers';`
+
+
 
 ## Reference
 

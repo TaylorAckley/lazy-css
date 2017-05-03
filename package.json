@@ -1,14 +1,14 @@
 {
-  "name": "create-css-helpers",
+  "name": "lazy-css",
   "version": "1.0.0",
-  "description": "",
+  "description": "collection of lazy css helpers for wireframing and prototyping",
   "main": "create-helpers.js",
   "scripts": {
     "start": "node create-helpers.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "taylorackley@gmail.com",
+  "license": "MIT",
   "dependencies": {
     "async": "^2.4.0",
     "lodash": "^4.17.4",
