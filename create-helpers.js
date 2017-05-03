@@ -72,16 +72,17 @@ let misc = `
 
 async.series([
     (cb) => {
+        console.log('Writing variables');
         _.forOwn(units, (v, k) => {
-            let str = `$${k}: ${v};`;
+            let str = `
+            $${k}: ${v};
+            `;
             _classes.push(str);
         });
         cb(null);
     },
     (cb) => {
-        //margin
-
-
+        console.log('Writing margin helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-margin-${k} {
@@ -94,7 +95,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //margin vertical
+        console.log('Writing margin vertical helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-margin-v-${k} {
@@ -108,7 +109,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //margin horiztonal
+        console.log('Writing margin horizontal helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-margin-h-${k} {
@@ -122,7 +123,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //margin top
+        console.log('Writing margin top helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-margin-top-${k} {
@@ -135,7 +136,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //margin bottom
+        console.log('Writing margin bottom helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-margin-bottom-${k} {
@@ -148,7 +149,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //margin left
+        console.log('Writing margin left helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-margin-left-${k} {
@@ -161,7 +162,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //margin right
+        console.log('Writing margin right helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-margin-right-${k} {
@@ -174,7 +175,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //spacer h
+        console.log('Writingspacer h helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-spacer-h-${k} {
@@ -189,7 +190,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //spacer h
+        console.log('Writing spacer v helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-spacer-v-${k} {
@@ -204,7 +205,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //padding
+        console.log('Writing padding helpers');
 
 
         _.forOwn(units, (v, k) => {
@@ -219,7 +220,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //padding vertical
+        console.log('Writing padding v helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-padding-v-${k} {
@@ -233,7 +234,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //padding horiztonal
+        console.log('Writing padding h helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-padding-h-${k} {
@@ -247,7 +248,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //padding top
+        console.log('Writing padding top helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-padding-top-${k} {
@@ -260,7 +261,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //padding bottom
+        console.log('Writing padding bottom helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-padding-bottom-${k} {
@@ -273,7 +274,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //padding left
+        console.log('Writing padding left helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-padding-left-${k} {
@@ -286,7 +287,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        //padding right
+        console.log('Writing padding right helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-padding-right-${k} {
@@ -299,7 +300,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        console.log(_classes.length);
+        console.log('Writing scss partial helpers');
         let file = fs.createWriteStream('./scss/_lazy-helpers.scss');
 
         file.on('error', (err) => console.log(err));
@@ -309,6 +310,7 @@ async.series([
             if (i === _classes.length) {
                 file.write(misc);
                 file.end();
+                console.log('scss partial written succesfully');
             }
         }
 
@@ -316,7 +318,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        console.log(_classes.length);
+        console.log('Writing scss file');
         let file2 = fs.createWriteStream('./scss/lazy-helpers.scss');
 
         file2.on('error', (err) => console.log(err));
@@ -326,6 +328,7 @@ async.series([
             if (i === _classes.length) {
                 file2.write(misc);
                 file2.end();
+                console.log('scss file written succesfully');
             }
         }
 
@@ -333,9 +336,9 @@ async.series([
         cb(null);
     },
     (cb) => {
+        console.log('compiling scss to css');
         setTimeout(() => {
             fs.readFile('./scss/lazy-helpers.scss', 'utf-8', (err, data) => {
-                console.log(data.length);
                 sass.render({
                     data: data
                 }, (err, result) => {
@@ -343,20 +346,17 @@ async.series([
                         console.log(err);
                     }
                     fs.writeFileSync('./css/lazy-helpers.css', result.css);
+                    console.log('scss compiled succesfully');
                 });
             });
-
-
-
-
         }, 5000);
 
         cb(null);
     },
     (cb) => {
         setTimeout(() => {
+            console.log('Compiling minified scss to css');
             fs.readFile('./scss/lazy-helpers.scss', 'utf-8', (err, data) => {
-                console.log(data.length);
                 sass.render({
                     data: data,
                     outputStyle: 'compressed'
@@ -365,6 +365,7 @@ async.series([
                         console.log(err);
                     }
                     fs.writeFileSync('./css/lazy-helpers.min.css', result.css);
+                    console.log('scss compiled to minified css succesfully');
                 });
             });
 
