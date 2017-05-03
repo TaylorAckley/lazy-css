@@ -3,6 +3,7 @@
 let fs = require('fs');
 let _ = require('lodash');
 let sass = require('node-sass');
+let async = require('async');
 
 
 let units = {
@@ -69,95 +70,113 @@ let misc = `
 }
 `;
 
-_.forOwn(units, (v, k) => {
-    let str = `$${k}: ${v};`;
-    _vars.push(str);
-});
+async.series([
+    (cb) => {
+        _.forOwn(units, (v, k) => {
+            let str = `$${k}: ${v};`;
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //margin
 
-//margin
 
-
-_.forOwn(units, (v, k) => {
-    let str = `
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-margin-${k} {
         margin: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//margin vertical
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //margin vertical
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-margin-v-${k} {
         margin-top: $${k} !important;
         margin-bottom: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//margin horiztonal
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //margin horiztonal
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-margin-h-${k} {
         margin-left: $${k} !important;
         margin-right: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//margin top
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //margin top
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-margin-top-${k} {
         margin-top: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//margin bottom
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //margin bottom
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-margin-bottom-${k} {
         margin-bottom: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//margin left
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //margin left
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-margin-left-${k} {
         margin-left: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//margin right
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //margin right
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-margin-right-${k} {
         margin-right: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//spacer h
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //spacer h
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-spacer-h-${k} {
         margin-right: $${k} !important;
         margin-left: $${k} !important;
@@ -165,12 +184,14 @@ _.forOwn(units, (v, k) => {
     }
 
     `;
-    _classes.push(str);
-});
-
-//spacer h
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //spacer h
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-spacer-v-${k} {
         margin-top: $${k} !important;
         margin-bottom: $${k} !important;
@@ -178,107 +199,180 @@ _.forOwn(units, (v, k) => {
     }
 
     `;
-    _classes.push(str);
-});
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //padding
 
-//padding
 
-
-_.forOwn(units, (v, k) => {
-    let str = `
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-padding-${k} {
         padding: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//padding vertical
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //padding vertical
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-padding-v-${k} {
         padding-top: $${k} !important;
         padding-bottom: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//padding horiztonal
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //padding horiztonal
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-padding-h-${k} {
         padding-left: $${k} !important;
         padding-right: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//padding top
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //padding top
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-padding-top-${k} {
         padding-top: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//padding bottom
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //padding bottom
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-padding-bottom-${k} {
         padding-bottom: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//padding left
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //padding left
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-padding-left-${k} {
         padding-left: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
-
-//padding right
-_.forOwn(units, (v, k) => {
-    let str = `
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        //padding right
+        _.forOwn(units, (v, k) => {
+            let str = `
     .helper-padding-right-${k} {
         padding-right: $${k} !important;
     }
 
     `;
-    _classes.push(str);
-});
+            _classes.push(str);
+        });
+        cb(null);
+    },
+    (cb) => {
+        console.log(_classes.length);
+        let file = fs.createWriteStream('./scss/_lazy-helpers.scss');
 
-let file = fs.createWriteStream('_css-helpers.scss');
+        file.on('error', (err) => console.log(err));
 
-file.on('error', (err) => console.log(err));
+        for (let i = 0; i < _classes.length; i++) {
+            file.write(_classes[i]);
+            if (i === _classes.length) {
+                file.write(misc);
+                file.end();
+            }
+        }
 
-_.forEach(_classes, (r) => file.write(r))
-file.write(misc);
-file.end();
 
-let result = sass.renderSync({
-    file: 'helpers.scss'
-});
+        cb(null);
+    },
+    (cb) => {
+        console.log(_classes.length);
+        let file2 = fs.createWriteStream('./scss/lazy-helpers.scss');
 
-fs.writeFileSync('helpers.css', result);
+        file2.on('error', (err) => console.log(err));
 
-let resultCompressed = sass.renderSync({
-    file: 'helpers.scss',
-    outputStyle: 'compressed',
-});
+        for (let i = 0; i < _classes.length; i++) {
+            file2.write(_classes[i]);
+            if (i === _classes.length) {
+                file2.write(misc);
+                file2.end();
+            }
+        }
 
-fs.writeFileSync('helpers.min.css', resultCompressed);
+
+        cb(null);
+    },
+    (cb) => {
+        setTimeout(() => {
+            fs.readFile('./scss/lazy-helpers.scss', 'utf-8', (err, data) => {
+                console.log(data.length);
+                sass.render({
+                    data: data
+                }, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    fs.writeFileSync('./css/lazy-helpers.css', result.css);
+                });
+            });
+
+
+
+
+        }, 5000);
+
+        cb(null);
+    },
+    (cb) => {
+        setTimeout(() => {
+            fs.readFile('./scss/lazy-helpers.scss', 'utf-8', (err, data) => {
+                console.log(data.length);
+                sass.render({
+                    data: data,
+                    outputStyle: 'compressed'
+                }, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                    }
+                    fs.writeFileSync('./css/lazy-helpers.min.css', result.css);
+                });
+            });
+
+
+
+
+        }, 5000);
+
+        cb(null);
+    }
+]);
