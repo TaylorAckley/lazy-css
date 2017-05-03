@@ -1,0 +1,26 @@
+{
+  "name": "lazy-css",
+  "description": "A collection of css and sass helpers for the lazy wireframer",
+  "main": "[create-helpers.js, 'scss/_lazy-helpers.scss', 'css/lazy-helpers.css']",
+  "authors": [
+    "Taylor Ackley <taylorackley@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "sass",
+    "css",
+    "helpers",
+    "scss",
+    "lazy",
+    "wireframing",
+    "prototyping"
+  ],
+  "homepage": "https://github.com/TaylorAckley/lazy-css",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

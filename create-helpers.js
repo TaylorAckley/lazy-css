@@ -175,7 +175,7 @@ async.series([
         cb(null);
     },
     (cb) => {
-        console.log('Writingspacer h helpers');
+        console.log('Writing spacer h helpers');
         _.forOwn(units, (v, k) => {
             let str = `
     .helper-spacer-h-${k} {
@@ -300,7 +300,8 @@ async.series([
         cb(null);
     },
     (cb) => {
-        console.log('Writing scss partial helpers');
+        console.log('Created ' + _classes.length + ' classes succesfully');
+        console.log('Writing scss partial');
         let file = fs.createWriteStream('./scss/_lazy-helpers.scss');
 
         file.on('error', (err) => console.log(err));
