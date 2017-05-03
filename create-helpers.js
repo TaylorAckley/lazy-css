@@ -2,6 +2,7 @@
 
 let fs = require('fs');
 let _ = require('lodash');
+let sass = require('node-sass');
 
 
 let units = {
@@ -261,10 +262,23 @@ _.forOwn(units, (v, k) => {
     _classes.push(str);
 });
 
-let file = fs.createWriteStream('_helpers.scss');
+let file = fs.createWriteStream('_css-helpers.scss');
 
 file.on('error', (err) => console.log(err));
 
 _.forEach(_classes, (r) => file.write(r))
 file.write(misc);
 file.end();
+
+let result = sass.renderSync({
+    file: 'helpers.scss'
+});
+
+fs.writeFileSync('helpers.css', result);
+
+let resultCompressed = sass.renderSync({
+    file: 'helpers.scss',
+    outputStyle: 'compressed',
+});
+
+fs.writeFileSync('helpers.min.css', resultCompressed);
