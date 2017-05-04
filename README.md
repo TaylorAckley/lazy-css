@@ -10,7 +10,7 @@ Install by using one of the popular package managers:
 
 - Bower : `bower install lazy-css`
 - NPM: `npm install lazy-css`
-- Yarn: `npm install lazy-css`
+- Yarn: `yarn install lazy-css`
 
 You can of course clone directly from github.
 
@@ -24,7 +24,7 @@ via CDN:
 
 Or you can import it into a existing scss/sass file:
 
-`@import 'lazy-helpers';`
+`@import '/node_modules/scss/lazy-helpers';`
 
 
 
