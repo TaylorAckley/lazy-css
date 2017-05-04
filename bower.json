@@ -16,6 +16,10 @@
     "prototyping"
   ],
   "homepage": "https://github.com/TaylorAckley/lazy-css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/taylorackley/lazy-css.git"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
